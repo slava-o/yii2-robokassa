@@ -23,12 +23,12 @@ class BaseAction extends Action
      * @return mixed
      * @throws InvalidConfigException
      */
-    protected function callback($merchant, $nInvId, $nOutSum, $shp)
+    protected function callback($merchant, $nInvId, $nOutSum, $shp, $EMail = null, $Fee = 0)
     {
         if (!is_callable($this->callback)) {
             throw new InvalidConfigException('"' . get_class($this) . '::callback" should be a valid callback.');
         }
-        $response = call_user_func($this->callback, $merchant, $nInvId, $nOutSum, $shp);
+        $response = call_user_func($this->callback, $merchant, $nInvId, $nOutSum, $shp, $EMail, $Fee);
         return $response;
     }
 }

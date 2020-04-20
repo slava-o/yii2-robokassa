@@ -33,6 +33,9 @@ class ResultAction extends BaseAction
             }
         }
 
+        $EMail = isset($_REQUEST['EMail']) ? $_REQUEST['EMail'] : null;
+        $Fee = isset($_REQUEST['Fee']) ? $_REQUEST['Fee'] : 0;
+
         if ($merchant->checkSignature(
             $_REQUEST['SignatureValue'],
             $_REQUEST['OutSum'],
@@ -40,7 +43,7 @@ class ResultAction extends BaseAction
             $merchant->sMerchantPass2,
             $shp)
         ) {
-            return $this->callback($merchant, $_REQUEST['InvId'], $_REQUEST['OutSum'], $shp);
+            return $this->callback($merchant, $_REQUEST['InvId'], $_REQUEST['OutSum'], $shp, $EMail, $Fee);
         }
 
         throw new BadRequestHttpException;
